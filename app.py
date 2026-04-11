@@ -33,7 +33,7 @@ col1.metric("Total Customers", total_customers)
 col2.metric("Churned Customers", churned)
 col3.metric("Churn Rate", f"{churn_rate:.2f}%")
 
-# --- Minimal Label Columns (only what we need) ---
+# --- Minimal Label Columns ---
 df["Churn_label"] = df["Churn"].map({0: "Stayed", 1: "Churned"})
 
 # --- IMPORTANT GRAPH 1 ---
@@ -44,7 +44,7 @@ sns.countplot(data=df, x="Churn_label", ax=ax)
 ax.set_title("Stayed vs Churned Customers")
 st.pyplot(fig)
 
-# --- IMPORTANT GRAPH 2 (UPDATED TO BAR GRAPH) ---
+# --- IMPORTANT GRAPH 2  ---
 st.subheader("💰 Monthly Charges Impact")
 
 avg_charges = df.groupby("Churn_label")["MonthlyCharges"].mean()
@@ -54,10 +54,11 @@ avg_charges.plot(kind='bar', ax=ax2)
 ax2.set_title("Average Monthly Charges by Churn")
 ax2.set_xlabel("Customer Status")
 ax2.set_ylabel("Average Charges")
+ax2.tick_params(axis='x', rotation=0)
 
 st.pyplot(fig2)
 
-# --- IMPORTANT GRAPH 3 (UPDATED TO BAR GRAPH) ---
+# --- IMPORTANT GRAPH 3  ---
 st.subheader("⏳ Customer Tenure Impact")
 
 avg_tenure = df.groupby("Churn_label")["tenure"].mean()
@@ -67,6 +68,7 @@ avg_tenure.plot(kind='bar', ax=ax3)
 ax3.set_title("Average Tenure by Churn")
 ax3.set_xlabel("Customer Status")
 ax3.set_ylabel("Average Tenure (months)")
+ax3.tick_params(axis='x', rotation=0)
 
 st.pyplot(fig3)
 
