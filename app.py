@@ -44,20 +44,30 @@ sns.countplot(data=df, x="Churn_label", ax=ax)
 ax.set_title("Stayed vs Churned Customers")
 st.pyplot(fig)
 
-# --- IMPORTANT GRAPH 2 ---
+# --- IMPORTANT GRAPH 2 (UPDATED TO BAR GRAPH) ---
 st.subheader("💰 Monthly Charges Impact")
 
+avg_charges = df.groupby("Churn_label")["MonthlyCharges"].mean()
+
 fig2, ax2 = plt.subplots()
-sns.boxplot(data=df, x="Churn_label", y="MonthlyCharges", ax=ax2)
-ax2.set_title("Higher Charges → Higher Churn Risk")
+avg_charges.plot(kind='bar', ax=ax2)
+ax2.set_title("Average Monthly Charges by Churn")
+ax2.set_xlabel("Customer Status")
+ax2.set_ylabel("Average Charges")
+
 st.pyplot(fig2)
 
-# --- IMPORTANT GRAPH 3 ---
+# --- IMPORTANT GRAPH 3 (UPDATED TO BAR GRAPH) ---
 st.subheader("⏳ Customer Tenure Impact")
 
+avg_tenure = df.groupby("Churn_label")["tenure"].mean()
+
 fig3, ax3 = plt.subplots()
-sns.boxplot(data=df, x="Churn_label", y="tenure", ax=ax3)
-ax3.set_title("Lower Tenure → Higher Churn Risk")
+avg_tenure.plot(kind='bar', ax=ax3)
+ax3.set_title("Average Tenure by Churn")
+ax3.set_xlabel("Customer Status")
+ax3.set_ylabel("Average Tenure (months)")
+
 st.pyplot(fig3)
 
 # --- Sidebar ---
